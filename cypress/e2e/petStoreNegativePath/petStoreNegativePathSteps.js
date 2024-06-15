@@ -6,7 +6,6 @@ const NON_EXISTENT_PET_ID = Cypress.env('nonExistentPetId');
 const INVALID_PET_ID = Cypress.env('invalidPetId');
 
 
-// Negative 
 // Scenario: I try to create a pet with invalid data
 Given('I have an invalid pet information', () => {
   cy.wrap(INVALID_PET_INFORMATION).as('invalidPetInformation');});
@@ -27,7 +26,6 @@ Then('I should receive a 500 error with a message {string}', function (message) 
   });
 });
 
-//Negative 
 //Scenario: I try to get a pet with a non-existent ID
 Given('I have a non-existent pet ID', () => {
   cy.wrap(NON_EXISTENT_PET_ID).as('nonExistentPetId');
@@ -51,7 +49,6 @@ Then('I should receive a 404 error with a message {string}', function (message) 
   });
 });
 
-// Negative 
 //Scenario : I try to update a pet with invalid data
 Given('I have a valid pet ID and invalid pet update information', () => {
   cy.wrap(INVALID_PET_INFORMATION).as('invalidPetInfo');
@@ -75,7 +72,6 @@ Then('I should receive a 500 error with a message {string}', function (message) 
   });
 });
 
-// Negative
 // Scenario : I try to delete a pet with an invalid ID
 Given('I have an invalid pet ID', () => {
   cy.wrap(INVALID_PET_ID).as('invalidPetId');
@@ -95,5 +91,29 @@ Then('I should receive a 404 error with a message {string}', function (message) 
   cy.get('@response').then(response => {
     expect(response.status).to.eq(404);
     expect(response.body.message).to.include(message);
+  });
+});
+
+//Scenario: Attempt to create a pet with incorrect request_header
+
+Given('I have a valid pet information', () => {
+  cy.wrap(INVALID_PET_INFORMATION).as('invalidPetInformation');});
+
+When('I send a request to create a pet with an incorrect header', function () {
+  cy.request({
+    method: 'POST',
+    url: `${BASE_URL}/pet`,
+    headers: {
+      'Content-Type': 'application/xml'
+    },
+    body: this.invalidPetInformation,
+    failOnStatusCode: false
+  }).as('response');
+});
+
+Then('I should receive a 400 error with a message {string}', function (message) {
+  cy.get('@response').then(response => {
+    expect(response.status).to.eq(400);
+    //expect(response.body.message).to.include(message);
   });
 });

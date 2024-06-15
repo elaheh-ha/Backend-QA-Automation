@@ -1,5 +1,0 @@
-To run project , you first need npm i to install all dependencies from package.json
-1- npm i --save-dev
-
-to run project write following command 
-2- npx cypress open
