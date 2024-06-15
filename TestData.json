@@ -1,0 +1,60 @@
+{
+  "validPets": [
+    {
+      "id": 101,
+      "name": "PetName1",
+      "category": { "id": 1, "name": "Dogs" },
+      "photoUrls": ["../cypress/TestData/pet1.jpeg"],
+      "tags": [{ "id": 1, "name": "Tag1" }],
+      "status": "available"
+    },
+    {
+      "id": 102,
+      "name": "PetName2",
+      "category": { "id": 2, "name": "Cats" },
+      "photoUrls": ["../cypress/TestData/pet2.jpeg"],
+      "tags": [{ "id": 2, "name": "Tag2" }],
+      "status": "pending"
+    }
+  ],
+  "invalidPets": [
+    {
+      "name": "",
+      "category": {},
+      "photoUrls": [],
+      "tags": [],
+      "status": ""
+    }
+  ],
+  "nonExistentPetId": "999999",
+  "invalidPetId": "invalidPetId", 
+  "orders": [
+      {
+        "id": 1,
+        "petId": 123456,
+        "quantity": 1,
+        "shipDate": "2024-06-14T11:26:01.513Z",
+        "status": "placed",
+        "complete": true
+      },
+      {
+        "id": 2,
+        "petId": 654321,
+        "quantity": 2,
+        "shipDate": "2024-06-15T11:26:01.513Z",
+        "status": "approved",
+        "complete": false
+      }
+    ],
+    "invalidOrders": [
+      {
+        "petId": "invalidPetId",
+        "quantity": "",
+        "shipDate": "invalidDate",
+        "status": "",
+        "complete": false
+      }
+    ],
+    "nonExistentOrderId": 1000001,
+    "invalidOrderId": "invalidOrderId"   
+  }
